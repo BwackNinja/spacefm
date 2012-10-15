@@ -1737,8 +1737,8 @@ exo_icon_view_expose_event (GtkWidget      *widget,
       /* we take advantage of double-buffering here and use only a single
        * draw_rectangle() operation w/o having to take care of clipping.
        */
-      gdk_cairo_set_source_color (cr, &priv->rubberband_fill_color);
-      cairo_rectangle (cr, rubber_rect.x + 0.5, rubber_rect.y + 0.5, rubber_rect.width + 1, rubber_rect.height + 1);
+      gdk_cairo_set_source_color (cr, priv->rubberband_fill_color);
+      cairo_rectangle (cr, rubber_rect.x + 0.5, rubber_rect.y + 0.5, rubber_rect.width - 1, rubber_rect.height - 1);
       cairo_fill (cr);
     }
 
@@ -1832,7 +1832,7 @@ exo_icon_view_expose_event (GtkWidget      *widget,
   if (G_UNLIKELY (priv->doing_rubberband))
     {
       /* draw the border */
-      gdk_cairo_set_source_color (cr, &priv->rubberband_border_color);
+      gdk_cairo_set_source_color (cr, priv->rubberband_border_color);
       cairo_set_line_width (cr, 1);
       cairo_rectangle (cr, rubber_rect.x + 0.5, rubber_rect.y + 0.5, rubber_rect.width - 1, rubber_rect.height - 1);
       cairo_stroke (cr);
