@@ -4984,7 +4984,7 @@ gboolean on_context_selection_change( GtkTreeSelection* tree_sel,
 static gboolean on_context_entry_keypress( GtkWidget *entry, GdkEventKey* event,
                                                             ContextData* ctxt )
 {    
-    if ( event->keyval == GDK_Return || event->keyval == GDK_KP_Enter )
+    if ( event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter )
     {
         if ( gtk_widget_get_sensitive( GTK_WIDGET( ctxt->btn_apply ) ) )
             on_context_button_press( GTK_WIDGET( ctxt->btn_apply ), ctxt );
@@ -6216,7 +6216,7 @@ gboolean xset_design_menu_keypress( GtkWidget* widget, GdkEventKey* event,
     
     if ( keymod == 0 )
     {        
-        if ( event->keyval == GDK_F1 )
+        if ( event->keyval == GDK_KEY_F1 )
         {
             char* help = NULL;
             job = GPOINTER_TO_INT( g_object_get_data( G_OBJECT(item), "job" ) );
@@ -6348,24 +6348,24 @@ gboolean xset_design_menu_keypress( GtkWidget* widget, GdkEventKey* event,
             xset_show_help( NULL, NULL, help );
             return TRUE;
         }
-        else if ( event->keyval == GDK_F3 )
+        else if ( event->keyval == GDK_KEY_F3 )
             job = XSET_JOB_CONTEXT;
-        else if ( event->keyval == GDK_F4 )
+        else if ( event->keyval == GDK_KEY_F4 )
             job = XSET_JOB_EDIT;
-        else if ( event->keyval == GDK_Delete )
+        else if ( event->keyval == GDK_KEY_Delete )
             job = XSET_JOB_REMOVE;
-        else if ( event->keyval == GDK_Insert )
+        else if ( event->keyval == GDK_KEY_Insert )
             job = XSET_JOB_COMMAND;
     }
     else if ( keymod == GDK_CONTROL_MASK )
     {
-        if ( event->keyval == GDK_c )
+        if ( event->keyval == GDK_KEY_c )
             job = XSET_JOB_COPY;
-        else if ( event->keyval == GDK_x )
+        else if ( event->keyval == GDK_KEY_x )
             job = XSET_JOB_CUT;
-        else if ( event->keyval == GDK_v )
+        else if ( event->keyval == GDK_KEY_v )
             job = XSET_JOB_PASTE;
-        else if ( event->keyval == GDK_e )
+        else if ( event->keyval == GDK_KEY_e )
         {
             if ( set->lock )
             {
@@ -6374,9 +6374,9 @@ gboolean xset_design_menu_keypress( GtkWidget* widget, GdkEventKey* event,
             else
                 job = XSET_JOB_EDIT;
         }
-        else if ( event->keyval == GDK_k )
+        else if ( event->keyval == GDK_KEY_k )
             job = XSET_JOB_KEY;
-        else if ( event->keyval == GDK_i )
+        else if ( event->keyval == GDK_KEY_i )
             job = XSET_JOB_ICON;
     }
     if ( job != -1 )
@@ -7070,33 +7070,33 @@ gboolean xset_menu_keypress( GtkWidget* widget, GdkEventKey* event,
     
     if ( keymod == 0 )
     {        
-        if ( event->keyval == GDK_F1 )
+        if ( event->keyval == GDK_KEY_F1 )
         {
             job = XSET_JOB_HELP;
         }
-        else if ( event->keyval == GDK_F2 )
+        else if ( event->keyval == GDK_KEY_F2 )
         {
             xset_design_show_menu( widget, set, 0, event->time );
             return TRUE;
         }
-        else if ( event->keyval == GDK_F3 )
+        else if ( event->keyval == GDK_KEY_F3 )
             job = XSET_JOB_CONTEXT;
-        else if ( event->keyval == GDK_F4 )
+        else if ( event->keyval == GDK_KEY_F4 )
             job = XSET_JOB_EDIT;
-        else if ( event->keyval == GDK_Delete )
+        else if ( event->keyval == GDK_KEY_Delete )
             job = XSET_JOB_REMOVE;
-        else if ( event->keyval == GDK_Insert )
+        else if ( event->keyval == GDK_KEY_Insert )
             job = XSET_JOB_COMMAND;
     }
     else if ( keymod == GDK_CONTROL_MASK )
     {
         if ( event->keyval == GDK_c )
             job = XSET_JOB_COPY;
-        else if ( event->keyval == GDK_x )
+        else if ( event->keyval == GDK_KEY_x )
             job = XSET_JOB_CUT;
-        else if ( event->keyval == GDK_v )
+        else if ( event->keyval == GDK_KEY_v )
             job = XSET_JOB_PASTE;
-        else if ( event->keyval == GDK_e )
+        else if ( event->keyval == GDK_KEY_e )
         {
             if ( set->lock )
             {
@@ -7106,9 +7106,9 @@ gboolean xset_menu_keypress( GtkWidget* widget, GdkEventKey* event,
             else
                 job = XSET_JOB_EDIT;
         }
-        else if ( event->keyval == GDK_k )
+        else if ( event->keyval == GDK_KEY_k )
             job = XSET_JOB_KEY;
-        else if ( event->keyval == GDK_i )
+        else if ( event->keyval == GDK_KEY_i )
             job = XSET_JOB_ICON;
     }
     if ( job != -1 )
@@ -7545,7 +7545,7 @@ GtkTextView* multi_input_new( GtkScrolledWindow* scrolled, const char* text,
 
 static gboolean on_input_keypress ( GtkWidget *widget, GdkEventKey *event, GtkWidget* dlg )
 {
-    if ( event->keyval == GDK_Return || event->keyval == GDK_KP_Enter )
+    if ( event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter )
     {
         gtk_dialog_response( GTK_DIALOG( dlg ), GTK_RESPONSE_OK );
         return TRUE;
@@ -7809,7 +7809,7 @@ void xset_text_dialog_activate( GtkEntry* entry, GtkDialog* dlg )
 static gboolean on_fontdlg_keypress ( GtkWidget *widget, GdkEventKey *event,
                                                                 GtkWidget* dlg )
 {
-    if ( event->keyval == GDK_Return || event->keyval == GDK_KP_Enter )
+    if ( event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter )
     {
         gtk_dialog_response( GTK_DIALOG( dlg ), GTK_RESPONSE_YES );
         return TRUE;

@@ -483,8 +483,8 @@ gboolean on_dir_tree_view_key_press( GtkWidget* view,
                                      gpointer user_data )
 {
     switch(evt->keyval) {
-    case GDK_Left:
-    case GDK_Right:
+    case GDK_KEY_Left:
+    case GDK_KEY_Right:
         break;
     default:
         return FALSE;
@@ -500,7 +500,7 @@ gboolean on_dir_tree_view_key_press( GtkWidget* view,
     GtkTreePath *path = gtk_tree_model_get_path(model, &iter);
 
     switch( evt->keyval ) {
-    case GDK_Left:
+    case GDK_KEY_Left:
         if(gtk_tree_view_row_expanded(GTK_TREE_VIEW(view), path)) {
             gtk_tree_view_collapse_row(GTK_TREE_VIEW(view), path);
         } else if(gtk_tree_path_up(path)) {
@@ -510,7 +510,7 @@ gboolean on_dir_tree_view_key_press( GtkWidget* view,
             return FALSE;
         }
         break;
-    case GDK_Right:
+    case GDK_KEY_Right:
         if(!gtk_tree_view_row_expanded(GTK_TREE_VIEW(view), path)) {
             gtk_tree_view_expand_row(GTK_TREE_VIEW(view), path, FALSE);
         } else {
