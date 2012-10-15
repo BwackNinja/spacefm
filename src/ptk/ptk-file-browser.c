@@ -4568,7 +4568,7 @@ gboolean on_folder_view_drag_motion ( GtkWidget *widget,
                 // automatic
                 file_browser->pending_drag_status = 1;
                 gtk_drag_get_data (widget, drag_context, target, time);
-                suggested_action = gdk_drag_context_get_suggested_action ( drag_context );
+                suggested_action = gdk_drag_context_get_selected_action ( drag_context );
             }
         }
         gdk_drag_status( drag_context, suggested_action, time );
