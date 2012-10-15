@@ -1,6 +1,11 @@
 #ifndef __GTK2_COMPAT_H
 #define __GTK2_COMPAT_H
 
+#if GTK_CHECK_VERSION(3, 0, 0)
+#else
+#define gtk_menu_shell_get_selected_item(mc) mc->active_menu_item
+#endif
+
 #if GTK_CHECK_VERSION(2, 24, 0)
 #else
 #define gtk_combo_box_text_new_with_entry gtk_combo_box_new_text
