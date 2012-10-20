@@ -6557,7 +6557,7 @@ static void xset_design_show_menu( GtkWidget* menu, XSet* set, guint button, gui
     gtk_widget_set_sensitive( newitem, ( set->menu_style < XSET_MENU_SUBMENU
                                         || toolexecsub ) );
     gtk_widget_add_accelerator( newitem, "activate", accel_group,
-                            GDK_k, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+                            GDK_KEY_k, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
     // Icon
     newitem = xset_design_additem( design_menu, _("_Icon"),
@@ -6569,7 +6569,7 @@ static void xset_design_show_menu( GtkWidget* menu, XSet* set, guint button, gui
                                         || set->menu_style == XSET_MENU_SUBMENU
                                         || set->tool ) && !open_all );
     gtk_widget_add_accelerator( newitem, "activate", accel_group,
-                            GDK_i, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+                            GDK_KEY_i, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
     //// Style submenu
     newitem = gtk_image_menu_item_new_with_mnemonic( _("_Style") );
@@ -6647,7 +6647,7 @@ static void xset_design_show_menu( GtkWidget* menu, XSet* set, guint button, gui
     gtk_widget_set_sensitive( newitem, xset_context && xset_context->valid
                                                             && !open_all );
     gtk_widget_add_accelerator( newitem, "activate", accel_group,
-                            GDK_F3, 0, GTK_ACCEL_VISIBLE);
+                            GDK_KEY_F3, 0, GTK_ACCEL_VISIBLE);
 
     newitem = xset_design_additem( submenu, _("Ign_ore Context (global)"),
                                 "@check", XSET_JOB_IGNORE_CONTEXT, set );
@@ -6671,7 +6671,7 @@ static void xset_design_show_menu( GtkWidget* menu, XSet* set, guint button, gui
     newitem = xset_design_additem( submenu, _("_Edit"),
                                 GTK_STOCK_EDIT, XSET_JOB_EDIT, set );
     gtk_widget_add_accelerator( newitem, "activate", accel_group,
-                            GDK_F4, 0, GTK_ACCEL_VISIBLE);
+                            GDK_KEY_F4, 0, GTK_ACCEL_VISIBLE);
     if ( !set->lock && geteuid() != 0 && atoi( set->x ) != 0 )
     {
         gboolean edit_as_root = TRUE;
@@ -6869,7 +6869,7 @@ static void xset_design_show_menu( GtkWidget* menu, XSet* set, guint button, gui
                                 GTK_STOCK_HELP, XSET_JOB_HELP, set );
     gtk_widget_set_sensitive( newitem, !set->lock || ( set->lock && set->line ) );
     gtk_widget_add_accelerator( newitem, "activate", accel_group,
-                            GDK_F1, 0, GTK_ACCEL_VISIBLE);
+                            GDK_KEY_F1, 0, GTK_ACCEL_VISIBLE);
 
     // Separator
     gtk_container_add ( GTK_CONTAINER ( design_menu ), gtk_separator_menu_item_new() );
@@ -6879,14 +6879,14 @@ static void xset_design_show_menu( GtkWidget* menu, XSet* set, guint button, gui
                                 GTK_STOCK_CUT, XSET_JOB_CUT, set );
     gtk_widget_set_sensitive( newitem, !set->lock && !set->plugin );
     gtk_widget_add_accelerator( newitem, "activate", accel_group,
-                            GDK_x, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+                            GDK_KEY_x, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
     // Copy
     newitem = xset_design_additem( design_menu, _("_Copy"),
                                 GTK_STOCK_COPY, XSET_JOB_COPY, set );
     gtk_widget_set_sensitive( newitem, !set->lock );
     gtk_widget_add_accelerator( newitem, "activate", accel_group,
-                            GDK_c, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+                            GDK_KEY_c, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
     // Paste
     newitem = xset_design_additem( design_menu, _("_Paste"),
@@ -6896,14 +6896,14 @@ static void xset_design_show_menu( GtkWidget* menu, XSet* set, guint button, gui
                         && !( set->tool && set_clipboard->menu_style ==
                                                     XSET_MENU_SUBMENU ) );
     gtk_widget_add_accelerator( newitem, "activate", accel_group,
-                            GDK_v, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+                            GDK_KEY_v, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
     // Remove
     newitem = xset_design_additem( design_menu, _("_Remove"),
                                 GTK_STOCK_REMOVE, XSET_JOB_REMOVE, set );
     gtk_widget_set_sensitive( newitem, !set->lock && !no_remove );
     gtk_widget_add_accelerator( newitem, "activate", accel_group,
-                            GDK_Delete, 0, GTK_ACCEL_VISIBLE);
+                            GDK_KEY_Delete, 0, GTK_ACCEL_VISIBLE);
 
     // Export
     newitem = xset_design_additem( design_menu, _("E_xport"),
@@ -6920,7 +6920,7 @@ static void xset_design_show_menu( GtkWidget* menu, XSet* set, guint button, gui
                                 GTK_STOCK_ADD, XSET_JOB_COMMAND, set );
     gtk_widget_set_sensitive( newitem, !set->plugin );
     gtk_widget_add_accelerator( newitem, "activate", accel_group,
-                            GDK_Insert, 0, GTK_ACCEL_VISIBLE);
+                            GDK_KEY_Insert, 0, GTK_ACCEL_VISIBLE);
 
     // New > Submenu
     newitem = xset_design_additem( design_menu, _("Sub_menu"),
@@ -7090,7 +7090,7 @@ gboolean xset_menu_keypress( GtkWidget* widget, GdkEventKey* event,
     }
     else if ( keymod == GDK_CONTROL_MASK )
     {
-        if ( event->keyval == GDK_c )
+        if ( event->keyval == GDK_KEY_c )
             job = XSET_JOB_COPY;
         else if ( event->keyval == GDK_KEY_x )
             job = XSET_JOB_CUT;

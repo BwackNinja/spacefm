@@ -128,10 +128,10 @@ struct _DesktopWindow
     GtkCellRenderer* icon_render;
 
     /* background image */
-    GdkPixmap* background;
+    /*GdkPixmap* background;*/
     DWBgType bg_type;
 
-    GdkGC* gc;
+    /*GdkGC* gc;*/
     GdkColor fg;
     GdkColor bg;
     GdkColor shadow;
@@ -154,7 +154,7 @@ GtkWidget* desktop_window_new          (void);
  *  If type = DW_BG_COLOR and src_pix = NULL, the background color is used to fill the window.
  */
 void desktop_window_set_background( DesktopWindow* win, GdkPixbuf* src_pix, DWBgType type );
-void desktop_window_set_pixmap( DesktopWindow* win, GdkPixmap* pix );
+/*void desktop_window_set_pixmap( DesktopWindow* win, GdkPixmap* pix );*/
 void desktop_window_set_bg_color( DesktopWindow* win, GdkColor* clr );
 void desktop_window_set_text_color( DesktopWindow* win, GdkColor* clr, GdkColor* shadow );
 
