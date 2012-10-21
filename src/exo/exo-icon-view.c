@@ -1567,10 +1567,12 @@ exo_icon_view_set_property (GObject      *object,
 
     case PROP_HSCROLL_POLICY:
       icon_view->priv->hscroll_policy = g_value_get_enum (value);
+      gtk_widget_queue_resize (GTK_WIDGET (icon_view));
       break;
 
     case PROP_VSCROLL_POLICY:
       icon_view->priv->vscroll_policy = g_value_get_enum (value);
+      gtk_widget_queue_resize (GTK_WIDGET (icon_view));
       break;
 #endif
 
@@ -1723,11 +1725,13 @@ exo_icon_view_size_allocate (GtkWidget     *widget,
   /* apply the new size allocation */
   gtk_widget_set_allocation (widget, allocation);
 
+#if !GTK_CHECK_VERSION (3, 0, 0)
   /* move/resize the clipping window, the icons window
    * will be handled by exo_icon_view_layout().
    */
   if (gtk_widget_get_realized (widget))
     gdk_window_move_resize (gtk_widget_get_window (widget), allocation->x, allocation->y, allocation->width, allocation->height);
+#endif
 
   /* layout the items */
   exo_icon_view_layout (icon_view);
@@ -1807,6 +1811,8 @@ exo_icon_view_expose_event (GtkWidget      *widget,
 #if !GTK_CHECK_VERSION (3, 0, 0)
   /* verify that the expose happened on the icon window */
   if (G_UNLIKELY (event->window != priv->bin_window))
+    return FALSE;
+  if (!G_UNLIKELY (gtk_cairo_should_draw_window (cr, priv->bin_window)))
     return FALSE;
 #endif
 
@@ -4396,7 +4402,7 @@ find_cell (ExoIconView     *icon_view,
         if (GTK_IS_CELL_RENDERER_TEXT (info->cell))
           first_text = i;
 
-        g_object_get (G_OBJECT (info->cell), "mode", &mode);
+        g_object_get (G_OBJECT (info->cell), "mode", &mode, NULL);
         if (mode != GTK_CELL_RENDERER_MODE_INERT)
           {
             if (cell == i)
